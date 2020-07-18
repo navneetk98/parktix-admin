@@ -1,6 +1,6 @@
 import LogoutButton from '../components/LogoutButton'
 import React, { useState, useEffect } from "react";
-import { firestore } from "./../firebase";
+import { firestore ,realtime} from "./../firebase";
 
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -51,10 +51,16 @@ const StyledTableCell = withStyles((theme) => ({
     },
   }));
 
+  realtime.database().ref('locations').on('value',(snap)=>{
+    var OperatorData=snap.val();
+    console.log(snap.val());
+  });
+
+
 const addOperator = () => {
     // const classes = useStyles();
     return (
-        <div>
+        <div marginTop="5000px">
             <Card variant="outlined" width="1000" marginLeft="70px" marginTop="100px" className="root">
                 <CardContent>
                     <Grid
@@ -62,6 +68,7 @@ const addOperator = () => {
                         direction="row"
                         justify="space-between"
                         alignItems="center"
+                        marginTop="100px"
                     >
                         <h1>Collection: Operators</h1>
                         </Grid>
@@ -75,7 +82,10 @@ const addOperator = () => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
+                                    {
+                                        {OperatorData}
 
+                                    }
                                 </TableBody>
                             </Table>
                         </TableContainer>

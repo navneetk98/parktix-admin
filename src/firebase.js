@@ -26,6 +26,7 @@ const firebaseConfig = {
 };
 
   const firebaseApp = firebase.initializeApp(firebaseConfig);
+  const realtime = firebase;
   const firestore = firebaseApp.firestore();
 
-  export { firebaseApp, uiConfig, firestore };
+  export { firebaseApp, uiConfig, firestore,realtime };
