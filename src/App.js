@@ -10,7 +10,7 @@ import Login from "./views/Login";
 import AssessmentForm from "./views/AssessmentForm";
 import CollectionListing from "./components/CollectionListing.jsx";
 import CollectionEdit from "./components/CollectionEdit.jsx";
-import addOperator from "./components/addOperator";
+import AddOperator from "./components/addOperator";
 import collections from "./commons/collections";
 import SideNav from "./components/SideNav";
 
@@ -46,7 +46,7 @@ function App() {
                 <Switch>
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute exact path="/" component={Home} />
-                  <PrivateRoute exact path="/operator" component={addOperator} />
+                  <PrivateRoute exact path="/operator" component={AddOperator} />
                   <PrivateRoute
                     exact
                     path="/assessments/edit/:assessmentID"
