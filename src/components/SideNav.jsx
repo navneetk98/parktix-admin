@@ -15,7 +15,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import collections from "../commons/collections";
 import { AuthContext } from "../context/AuthContext";
 import { NavLink, useParams } from "react-router-dom";
 import SideNavStyles from "./SideNavStyles";
@@ -110,23 +109,6 @@ const SideNav = ({ classes, setVal, resetVal }) => {
                 <ListItemText primary="View Logs" />
               </NavLink>
             </ListItem>
-
-            {collections.map(({ name, urlKey }) => (
-              <ListItem button key={name}>
-                <NavLink
-                  to={`/${urlKey}`}
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <ListItemText primary={name} />
-                </NavLink>
-              </ListItem>
-            ))}
-
-            {/* {collections.map(({ name, urlKey }) => (
-              <ListItemLink href={`/${urlKey}`}>
-                <ListItemText primary={name} />
-              </ListItemLink>
-            ))} */}
           </List>
         </Drawer>
       </div>

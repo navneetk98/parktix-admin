@@ -1,36 +1,16 @@
-import LogoutButton from '../components/LogoutButton'
 import React, { useState, useEffect } from "react";
 import { firestore, realtime } from "./../firebase";
-
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
 import Table from "@material-ui/core/Table";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import Button from "@material-ui/core/Button";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import EditSharpIcon from "@material-ui/icons/EditSharp";
-import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import axios from "axios";
-import { startHydration } from "./../commons/FirebaseRefHydrate";
-import {
-  SignalCellularNullOutlined,
-  AirlineSeatReclineExtra,
-} from "@material-ui/icons";
-import { queryAllByAltText } from "@testing-library/react";
-import { set } from "date-fns";
-import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
-
-
-
-
 
 const AddOperator = () => {
   const [documents, setDocuments] = useState([]);
@@ -58,8 +38,10 @@ const AddOperator = () => {
     },
   }));
 
+  const handleAddClick = async (identity)=>{
+    alert(identity);
+  }
   const getNewItems = () => {
-
     firestore
       .collection("admin-profiles")
       .get()
@@ -74,27 +56,30 @@ const AddOperator = () => {
         console.log("Error: ", error);
       });
   }
-  //   axios.get(backendUrl).then(({ data }) => {
-  //     setDocuments(() => data);
-  //   });
-  //   return;
-  // }
   useEffect(() => {
     getNewItems();
   }, []);
 
-  const generateRows=()=>{
+  const generateRows = () => {
     return documents.map(docsnap => {
       return <StyledTableRow>
-                <StyledTableCell>{docsnap.id}</StyledTableCell>
-                <StyledTableCell>{docsnap.maindata.name}</StyledTableCell>
-                <StyledTableCell>{docsnap.maindata.phoneNumber}</StyledTableCell>
-            </StyledTableRow>
-      })
+        <StyledTableCell>{docsnap.id}</StyledTableCell>
+        <StyledTableCell>{docsnap.maindata.name}</StyledTableCell>
+        <StyledTableCell>{docsnap.maindata.phoneNumber}</StyledTableCell>
+        <StyledTableCell>
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              disableRipple
+                              onClick={() => handleAddClick(docsnap.id)}
+                            >
+                              Remove User
+                            </Button>
+                          </StyledTableCell>
+      </StyledTableRow>
+    })
   };
 
-
-  // const classes = useStyles();
   return (
     <div marginTop="5000px">
       <Card variant="outlined" width="1000" marginLeft="70px" marginTop="100px" className="root">
@@ -115,6 +100,7 @@ const AddOperator = () => {
                   {<StyledTableCell>Id</StyledTableCell>}
                   {<StyledTableCell>Name</StyledTableCell>}
                   {<StyledTableCell>Mobile</StyledTableCell>}
+                  {<StyledTableCell>Remove User</StyledTableCell>}
                 </StyledTableRow>
               </TableHead>
               <TableBody>

@@ -1,6 +1,6 @@
 {
-  "short_name": "Masterlife Admin Panel",
-  "name": "Admin panel for the Masterlife app",
+  "short_name": "Parktix Admin Panel",
+  "name": "Admin panel for the Parktix app",
   "icons": [
     {
       "src": "favicon.ico",
