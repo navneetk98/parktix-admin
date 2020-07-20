@@ -86,8 +86,8 @@ const SideNav = ({ classes, setVal, resetVal }) => {
               {theme.direction === "ltr" ? (
                 <ChevronLeftIcon />
               ) : (
-                <ChevronRightIcon />
-              )}
+                  <ChevronRightIcon />
+                )}
             </IconButton>
           </div>
           <Divider />
@@ -101,10 +101,15 @@ const SideNav = ({ classes, setVal, resetVal }) => {
               </NavLink>
             </ListItem>
             <ListItem button key="Add operator">
-                    <NavLink to="/operator" style={{ textDecoration: "none", color: "inherit" }}>
-                        <ListItemText primary="Add Operator" />
-                    </NavLink>
-                </ListItem>
+              <NavLink to="/operator" style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItemText primary="Add Operator" />
+              </NavLink>
+            </ListItem>
+            <ListItem button key="View Logs">
+              <NavLink to="/logs" style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItemText primary="View Logs" />
+              </NavLink>
+            </ListItem>
 
             {collections.map(({ name, urlKey }) => (
               <ListItem button key={name}>

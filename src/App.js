@@ -11,6 +11,7 @@ import AssessmentForm from "./views/AssessmentForm";
 import CollectionListing from "./components/CollectionListing.jsx";
 import CollectionEdit from "./components/CollectionEdit.jsx";
 import AddOperator from "./components/addOperator";
+import ViewLogs from "./components/viewLogs"
 import collections from "./commons/collections";
 import SideNav from "./components/SideNav";
 
@@ -47,6 +48,7 @@ function App() {
                   <Route exact path="/login" component={Login} />
                   <PrivateRoute exact path="/" component={Home} />
                   <PrivateRoute exact path="/operator" component={AddOperator} />
+                  <PrivateRoute exact path="/logs" component={ViewLogs} />
                   <PrivateRoute
                     exact
                     path="/assessments/edit/:assessmentID"

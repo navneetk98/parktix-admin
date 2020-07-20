@@ -32,7 +32,7 @@ import { useContext } from "react";
 
 
 
-const AddOperator = () => {
+const ViewLogs = () => {
   const [documents, setDocuments] = useState([]);
 
   const StyledTableCell = withStyles((theme) => ({
@@ -49,7 +49,7 @@ const AddOperator = () => {
       },
     },
   }))(TableRow);
-
+console.log("hello");
   const useStyles = withStyles((theme) => ({
     root: {
       width: 1000,
@@ -60,19 +60,9 @@ const AddOperator = () => {
 
   const getNewItems = () => {
 
-    firestore
-      .collection("admin-profiles")
-      .get()
-      .then((querySnapshot) => {
-        let docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ id: doc.id, maindata: doc.data() });
-        });
-        setDocuments(docs);
-      })
-      .catch((error) => {
-        console.log("Error: ", error);
-      });
+    realtime.database().ref('logs').child("-MAiiqWnIcXWGBvQbHXc").on('value', (snap) => {
+      setDocuments(() => Object.values(snap.val()));
+    });
   }
   //   axios.get(backendUrl).then(({ data }) => {
   //     setDocuments(() => data);
@@ -86,9 +76,9 @@ const AddOperator = () => {
   const generateRows=()=>{
     return documents.map(docsnap => {
       return <StyledTableRow>
-                <StyledTableCell>{docsnap.id}</StyledTableCell>
-                <StyledTableCell>{docsnap.maindata.name}</StyledTableCell>
-                <StyledTableCell>{docsnap.maindata.phoneNumber}</StyledTableCell>
+                <StyledTableCell>{docsnap["payID"]}</StyledTableCell>
+                <StyledTableCell>{docsnap["vregno"]}</StyledTableCell>
+                <StyledTableCell>{docsnap["status"]}</StyledTableCell>
             </StyledTableRow>
       })
   };
@@ -112,9 +102,9 @@ const AddOperator = () => {
             <Table aria-label="simple table" className="class">
               <TableHead>
                 <StyledTableRow>
-                  {<StyledTableCell>Id</StyledTableCell>}
-                  {<StyledTableCell>Name</StyledTableCell>}
-                  {<StyledTableCell>Mobile</StyledTableCell>}
+                  {<StyledTableCell>PayID</StyledTableCell>}
+                  {<StyledTableCell>Vehicle RegNo.</StyledTableCell>}
+                  {<StyledTableCell>status</StyledTableCell>}
                 </StyledTableRow>
               </TableHead>
               <TableBody>
@@ -132,4 +122,4 @@ const AddOperator = () => {
 
 }
 
-export default AddOperator;
+export default ViewLogs;
